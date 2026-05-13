@@ -1,25 +1,16 @@
-import React, { useState, useEffect } from 'react';
-import { View, TextInput, Button, Text, StyleSheet, Alert } from 'react-native';
-import { login, signup, authListener } from '../utils/authManager';
+import React, { useState } from "react";
+import { View, TextInput, Button, Text, StyleSheet, Alert } from "react-native";
+import { login, signup } from "../utils/authManager";
 
-export default function LoginScreen({ navigation }) {
-  const [email, setEmail] = useState('');
-  const [password, setPassword] = useState('');
-
-  useEffect(() => {
-    const unsubscribe = authListener((user) => {
-      if (user) {
-        navigation.replace('Main');
-      }
-    });
-    return unsubscribe;
-  }, []);
+export default function LoginScreen() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const handleLogin = async () => {
     try {
       await login(email, password);
     } catch (e) {
-      Alert.alert('Login Error', e.message);
+      Alert.alert("Login Error", e.message);
     }
   };
 
@@ -27,7 +18,7 @@ export default function LoginScreen({ navigation }) {
     try {
       await signup(email, password);
     } catch (e) {
-      Alert.alert('Signup Error', e.message);
+      Alert.alert("Signup Error", e.message);
     }
   };
 
@@ -59,22 +50,22 @@ export default function LoginScreen({ navigation }) {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#000',
-    justifyContent: 'center',
+    backgroundColor: "#000",
+    justifyContent: "center",
     padding: 20,
   },
   input: {
     borderWidth: 1,
-    borderColor: '#00FFFF',
+    borderColor: "#00FFFF",
     borderRadius: 8,
     padding: 10,
     marginBottom: 15,
-    color: '#fff',
+    color: "#fff",
   },
   title: {
-    color: '#00FFFF',
+    color: "#00FFFF",
     fontSize: 28,
     marginBottom: 30,
-    textAlign: 'center',
+    textAlign: "center",
   },
 });

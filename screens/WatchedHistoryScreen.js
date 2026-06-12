@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View, Text, FlatList, Image,
   TouchableOpacity, StyleSheet
@@ -8,9 +9,11 @@ import { loadHistory, clearHistory } from '../utils/historyManager';
 export default function WatchedHistoryScreen({ navigation }) {
   const [history, setHistory] = useState([]);
 
-  useEffect(() => {
-    fetchHistory();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchHistory();
+    }, [])
+  );
 
   const fetchHistory = async () => {
     const data = await loadHistory();

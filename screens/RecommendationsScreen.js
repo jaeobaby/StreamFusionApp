@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View, Text, FlatList, Image,
   TouchableOpacity, StyleSheet, ActivityIndicator
@@ -9,9 +10,11 @@ export default function RecommendationsScreen({ navigation }) {
   const [recs, setRecs] = useState([]);
   const [loading, setLoading] = useState(true);
 
-  useEffect(() => {
-    fetchRecs();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchRecs();
+    }, [])
+  );
 
   const fetchRecs = async () => {
     setLoading(true);

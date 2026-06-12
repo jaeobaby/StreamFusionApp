@@ -64,7 +64,7 @@ export default function DetailsScreen({ route }) {
         <Text style={styles.overview}>{details.overview}</Text>
         <View style={styles.buttons}>
           <TouchableOpacity
-            style={styles.btn}
+            style={[styles.btn, { marginRight: 10 }]}
             onPress={() => addToQueue({ ...details, media_type: type })}
           >
             <Text style={styles.btnText}>+ Add to Queue</Text>
@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   title: { color: '#00FFFF', fontSize: 24, fontWeight: 'bold', marginBottom: 8 },
   meta: { color: '#888', fontSize: 14, marginBottom: 12 },
   overview: { color: '#fff', fontSize: 15, lineHeight: 22, marginBottom: 20 },
-  buttons: { flexDirection: 'row', gap: 10 },
+  buttons: { flexDirection: 'row' },
   btn: {
     flex: 1, backgroundColor: '#00FFFF',
     padding: 12, borderRadius: 8, alignItems: 'center',

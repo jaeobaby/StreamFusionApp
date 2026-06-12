@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useCallback } from 'react';
+import { useFocusEffect } from '@react-navigation/native';
 import {
   View, Text, FlatList, Image,
   TouchableOpacity, StyleSheet
@@ -8,9 +9,11 @@ import { loadQueue, removeFromQueue } from '../utils/queueManager';
 export default function QueueScreen({ navigation }) {
   const [queue, setQueue] = useState([]);
 
-  useEffect(() => {
-    fetchQueue();
-  }, []);
+  useFocusEffect(
+    useCallback(() => {
+      fetchQueue();
+    }, [])
+  );
 
   const fetchQueue = async () => {
     const data = await loadQueue();

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { NavigationContainer } from "@react-navigation/native";
+import { NavigationContainer, DarkTheme } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Ionicons } from "@expo/vector-icons";
@@ -66,7 +66,7 @@ export default function App() {
   }
 
   return (
-    <NavigationContainer theme={{ colors: { background: "#000" } }}>
+    <NavigationContainer theme={{ ...DarkTheme, colors: { ...DarkTheme.colors, background: "#000" } }}>
       <Stack.Navigator screenOptions={{ headerShown: false }}>
         {user ? (
           <>

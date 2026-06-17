@@ -1,50 +1,60 @@
-# Welcome to your Expo app 👋
+# StreamFusion
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A personalized streaming-discovery app for people who are serious about what they watch. StreamFusion aggregates movies and shows into one place, lets you build a personal watch queue, tracks what you've seen, and learns your taste.
 
-## Get started
+Built from scratch with React Native and Expo, deployed as a production Android app.
 
-1. Install dependencies
+---
 
-   ```bash
-   npm install
-   ```
+## Features
 
-2. Start the app
+- **Discover** — Browse trending, popular, and top-rated movies and shows, plus genre-based rows, pulled live from a real content database.
+- **Search** — Look up any title and get full details instantly: poster, synopsis, rating, and release date.
+- **Personal Queue** — Add anything that catches your eye to a watchlist so you never lose track of it.
+- **Watch History** — Mark titles as watched; the app remembers what you've seen.
+- **Recommendations** — A custom recommendation engine analyzes your genre preferences and viewing patterns to surface content tailored to you.
+- **Accounts** — Email/password authentication with persistent sessions.
 
-   ```bash
-   npx expo start
-   ```
+---
 
-In the output, you'll find options to open the app in a
+## Tech Stack
 
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
+| Layer | Technology |
+|-------|-----------|
+| Framework | React Native (Expo SDK 54) |
+| Navigation | React Navigation (tab + native stack) |
+| Authentication | Firebase Authentication |
+| Session persistence | AsyncStorage |
+| Content data | TMDB REST API (via Axios) |
+| Animations | React Native Reanimated + Worklets |
+| Build & distribution | Expo Application Services (EAS) |
 
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
+---
 
-## Get a fresh project
+## Architecture Notes
 
-When you're ready, run:
+- **Navigation** combines a bottom-tab navigator (Discover, Queue, Recommendations, History, Search) with native stack navigators for detail views.
+- **The recommendation engine** builds a unique feed per user from their genre frequency and viewing patterns.
+- **Tab screens refresh on focus** using `useFocusEffect`.
+- **Authentication state** is managed app-wide through a Firebase auth listener.
 
-```bash
-npm run reset-project
-```
+---
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Engineering Challenges Solved
 
-## Learn more
+Bringing StreamFusion to a working standalone Android build meant debugging a multi-layered startup failure:
 
-To learn more about developing your project with Expo, look at the following resources:
+- **Native dependency mismatch** — Reanimated 4 on SDK 54 needed `react-native-worklets`, not `react-native-worklets-core`.
+- **App entry point** — Adding a proper `index.js` with `registerRootComponent` fixed a crash and silent splash-screen death.
+- **Bundler module resolution** — Disabling `unstable_enablePackageExports` kept Metro from loading the wrong Firebase Auth build.
+- **Framework breaking change** — React Navigation v7 needed a full theme object; spreading the built-in theme fixed a header crash.
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+---
 
-## Join the community
+## Status
 
-Join our community of developers creating universal apps.
+StreamFusion is deployed and running on Android via EAS. The next phase is **SubHub** — a subscription-management platform that tracks what a user pays for, surfaces renewal dates, and flags unused subscriptions. Where StreamFusion is about discovery, SubHub is about intelligence.
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+---
+
+*Built by Jaamal Oakmon — [LinkedIn](https://www.linkedin.com/in/jaamal-oakmon-34586940a)*

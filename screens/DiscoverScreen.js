@@ -66,7 +66,7 @@ export default function DiscoverScreen({ navigation }) {
   );
 
   const renderSection = (title, data) => (
-    <View style={styles.section}>
+    <View key={title} style={styles.section}>
       <Text style={styles.sectionTitle}>{title}</Text>
       <FlatList
         data={data}

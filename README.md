@@ -58,3 +58,11 @@ StreamFusion is deployed and running on Android via EAS. The next phase is **Sub
 ---
 
 *Built by Jaamal Oakmon — [LinkedIn](https://www.linkedin.com/in/jaamal-oakmon-34586940a)*
+
+## Screenshots
+
+<p float="left">
+  <img src="Discover.jpeg" width="250" />
+  <img src="Queue.jpeg" width="250" />
+  <img src="Recommendations.jpeg" width="250" />
+</p>
